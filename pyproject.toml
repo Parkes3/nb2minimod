@@ -1,0 +1,11 @@
+[project]
+name = "nb2minimod"
+version = "0.1.0"
+dependencies = ['typer', 'nbformat']
+
+[build-system]
+requires = ["setuptools >= 61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+nb2mm = "nb2minimod.cli:app"

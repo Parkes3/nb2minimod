@@ -1,0 +1,11 @@
+pyproject.toml
+src/nb2minimod/__init__.py
+src/nb2minimod/__main__.py
+src/nb2minimod/cli.py
+src/nb2minimod/script_from_notebook.py
+src/nb2minimod.egg-info/PKG-INFO
+src/nb2minimod.egg-info/SOURCES.txt
+src/nb2minimod.egg-info/dependency_links.txt
+src/nb2minimod.egg-info/entry_points.txt
+src/nb2minimod.egg-info/requires.txt
+src/nb2minimod.egg-info/top_level.txt
