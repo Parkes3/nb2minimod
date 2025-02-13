@@ -14,7 +14,7 @@ CLI uses typer.
 
 `nb2minimod --help` will show the following:
 
-`Usage: nb2script [OPTIONS] [PATH] [FOLDER_NAME]`
+## Usage: nb2script [OPTIONS] [PATH] [FOLDER_NAME]
 
 Take a path to either a directory or a single notebook file and generate a Python module from each notebook file. The module will be given the same name as the notebook file, and will contain all code cells that start with `#| export`. The contents (including comments) of these code cells will be in the same order as they appear in the notebook.
 
@@ -29,13 +29,13 @@ If path is None, the current directory will be used.
 - `nb2script notebook.ipynb`
 - `nb2script my_notebooks --no-create-core`
 
-## Arguments
+### Arguments
 | Argument    | Description            | Default  |
 |-------------|------------------------|----------|
 | `path`      | [PATH]                 | [default: None] |
 | `folder_name` | [FOLDER_NAME]         | [default: None] |
 
-## Options
+### Options
 | Option                     | Description                                                       | Default                 |
 |----------------------------|-------------------------------------------------------------------|-------------------------|
 | `--create-core`, `--no-create-core` | [default: create-core]                                     |                         |
