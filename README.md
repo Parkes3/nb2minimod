@@ -4,6 +4,8 @@ From Jupyter notebooks, take all the cells that have `# export` and output them 
 
 `pip install nb2minimod`
 
+example shown in `example_project`
+
 ## CLI
 
 `nb2minimod path/my_project/` will create a folder called `my_project` with a file for each `ipynb` file.
@@ -12,7 +14,7 @@ CLI uses typer.
 
 `nb2minimod --help` will show the following:
 
-# Usage: nb2script [OPTIONS] [PATH] [FOLDER_NAME]
+`Usage: nb2script [OPTIONS] [PATH] [FOLDER_NAME]`
 
 Take a path to either a directory or a single notebook file and generate a Python module from each notebook file. The module will be given the same name as the notebook file, and will contain all code cells that start with `#| export`. The contents (including comments) of these code cells will be in the same order as they appear in the notebook.
 
