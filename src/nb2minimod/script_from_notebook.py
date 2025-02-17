@@ -19,22 +19,36 @@ def is_export(cell):
     dirs, code = split_cell(cell)
     return any('#| export\n'==d for d in dirs)
 
-def read_and_write_to_script(nb, stem_name:Path, mod_name:str):
+def read_and_write_to_script(nb, stem_name:Path, mod_name:str, _write=True):
     code_cells = [c['source'] for c in nb['cells'] if c['cell_type']=='code']
     export_cells = [cell for cell in code_cells if is_export(cell)]
 
     if len(export_cells) == 0:
         return ''
     
-    script_path = Path(stem_name) / (mod_name+'.py')
-    with open(script_path, 'w') as f:
-        #TODO duplicated functions accross
-        script_globals = [f'{mod_name}_globals = globals()']
+    if _write:
+        script_path = Path(stem_name) / (mod_name+'.py')
+        with open(script_path, 'w') as f:
+            #TODO duplicated functions accross
+            script_globals = [f'{mod_name}_globals = globals()']
 
-        f.write('\n\n'.join(export_cells))
-        if script_path.exists():
-            print((mod_name+'.py'), 'was written')
+            f.write('\n\n'.join(export_cells))
+            if script_path.exists():
+                print((mod_name+'.py'), 'was written')
     return f'from .{mod_name} import *\n'
+
+def get_is_dir(path):
+    if not isinstance(path, Path):
+        path = Path(path)
+    if path.suffix == '':
+        is_dir = True
+        base_stem = path.stem
+        nb_files = path.glob('*.ipynb')
+    else:
+        is_dir = False
+        base_stem = path.parts[-2]
+        nb_files = [path.name]
+    return is_dir, base_stem, nb_files
 
 
 def main(path:Annotated[Optional[str], typer.Argument()]=None,
@@ -64,22 +78,16 @@ def main(path:Annotated[Optional[str], typer.Argument()]=None,
     """
     if path is None:
         path='.'
+
     path=Path(path)
-    base_path = path.resolve()
+    path = path.resolve()
     
-    if base_path.suffix == '':
-        is_dir = True
-        base_stem = base_path.stem
-        nb_files = base_path.glob('*.ipynb')
-    else:
-        is_dir = False
-        base_stem = base_path.parts[-2]
-        nb_files = [base_path.name]
+    is_dir, base_stem, nb_files = get_is_dir(path)
     
     if folder_name is None:
         folder_name = base_stem
 
-    stem_path = base_path/folder_name
+    stem_path = path/folder_name
     if not stem_path.exists():
         stem_path.mkdir(exist_ok=False)
 
