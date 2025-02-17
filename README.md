@@ -4,7 +4,7 @@ From Jupyter notebooks, take all the cells that have `# export` and output them 
 
 `pip install nb2minimod`
 
-example shown in `example_project`
+example shown in `tests/example_project`
 
 ## CLI
 
